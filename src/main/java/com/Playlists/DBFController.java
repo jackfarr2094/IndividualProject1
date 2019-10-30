@@ -74,12 +74,11 @@ public class DBFController {
 	 /*@PutMapping("/update/{id}/{url}/{playlist}/{subGenre}/{featuredArtist}")
 	public void UpdateData (@PathVariable int id, @PathVariable String url, @PathVariable String playlistName, @PathVariable String subGenre, @PathVariable String featuredArtist) {
 		RockPlaylists Ref = new RockPlaylists();
-		Ref.setId(id);
-		Ref.setUrl(url);
-		Ref.setplaylistName(playlistName);
-		Ref.setsubGenre(subGenre);
-		Ref.setfeaturedArtist(featuredArtist);
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+			.buildAndExpand(Ref.getId()).toUri();
 		repo.update(Ref);
+		return;
+
 		}*/
 	
 	@DeleteMapping("/Deleteby/{pn}")
