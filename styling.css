@@ -1,0 +1,17 @@
+.searchBar{
+    position: absolute;
+    left: 40%;
+}
+
+.searchButton{
+    position: absolute;
+    left: 55%;
+}
+.panel {
+    position: absolute;
+    left: 40%;
+}
+.imageRight {
+    position: absolute;
+    right: 20%;
+}
