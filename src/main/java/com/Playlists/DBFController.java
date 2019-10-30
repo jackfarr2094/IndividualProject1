@@ -1,23 +1,29 @@
 package com.Playlists;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.Playlists.RockPlaylists;
 import com.Playlists.RockPlaylistsRepo;
 
 @RestController
+@CrossOrigin("*")
 public class DBFController {
 	
 	@Autowired
@@ -47,15 +53,14 @@ public class DBFController {
 	public ArrayList<RockPlaylists> findBysubGenreAndFeaturedArtist(@PathVariable String s, @PathVariable String ar) {
 		return repo.findBysubGenreAndFeaturedArtist(s, ar);
 	}
-	@PostMapping("/Save/{url}/{playlistName}/{subgenre}/{featuredArtist}")
-	public void SaveData (@PathVariable int id, @PathVariable String url, @PathVariable String playlistName, @PathVariable String subGenre, @PathVariable String featuredArtist) {
-		RockPlaylists Ref = new RockPlaylists();
-		Ref.setId(id);
-		Ref.setUrl(url);
-		Ref.setplaylistName(playlistName);
-		Ref.setsubGenre(subGenre);
-		Ref.setfeaturedArtist(featuredArtist);
-		repo.save(Ref);
+	@PostMapping("/RockPlaylists")
+	public ResponseEntity<Object> createSRockPlaylists(@RequestBody RockPlaylists rockplaylists) {
+		RockPlaylists savedRockPlaylists = repo.save(rockplaylists);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{playlistName}")
+				.buildAndExpand(savedRockPlaylists.getId()).toUri();
+
+		return ResponseEntity.created(location).build();
 	}
 	@RequestMapping("/save")
 	public String SaveData (@RequestBody RockPlaylists Ref) {
@@ -66,12 +71,23 @@ public class DBFController {
 			return "Record saved";
 		}
 	}
-	@DeleteMapping("/Deleteby/{playlistName}")
-	public void DeletebyPlaylistName (@PathVariable String playlistName) {
+	 /*@PutMapping("/update/{id}/{url}/{playlist}/{subGenre}/{featuredArtist}")
+	public void UpdateData (@PathVariable int id, @PathVariable String url, @PathVariable String playlistName, @PathVariable String subGenre, @PathVariable String featuredArtist) {
 		RockPlaylists Ref = new RockPlaylists();
-		Ref.getplaylistName();
-		repo.delete(Ref);
-		
+		Ref.setId(id);
+		Ref.setUrl(url);
+		Ref.setplaylistName(playlistName);
+		Ref.setsubGenre(subGenre);
+		Ref.setfeaturedArtist(featuredArtist);
+		repo.update(Ref);
+		}*/
+	
+	@DeleteMapping("/Deleteby/{pn}")
+	public String deletebyplaylistName (@PathVariable String playlistName) {
+		//RockPlaylists Ref = new RockPlaylists();
+		//Ref.getplaylistName();
+		repo.deleteByPlaylistName(playlistName);
+		return "Delete Successful";
 		
 	}
 }
