@@ -47,7 +47,7 @@ function showAllRecords() {
         renderData(JSON.parse(request.response)); 
     }
     request.send
-    console.log("Hello my friend")
+    console.log("Show All")
 }
 
 
@@ -58,6 +58,7 @@ function findbyfeaturedArtist() {
         renderData(JSON.parse(request.response));
     }
     request.send
+    console.log("Artist")
 }
 function findbysubGenre() {
     let request = new XMLHttpRequest();
@@ -65,15 +66,17 @@ function findbysubGenre() {
     request.onload = function () {
         renderData(JSON.parse(request.response));
     }
-    request.send();
+    request.send
+    console.log("SubGenre")
 }
-function findbyplayListName() {
+function findbyplaylistName() {
     let request = new XMLHttpRequest();
     request.open("GET", "https://localhost:9001/findByPlayListName/{pn}");
     request.onload = function () {
         renderData(JSON.parse(request.response));
     }
-    request.send();
+    request.send
+    console.log("Playlist Name")
 }
 function findbyUrl() {
     let request = new XMLHttpRequest();
@@ -81,7 +84,7 @@ function findbyUrl() {
     request.onload = function () {
         renderData(JSON.parse(request.response));
     }
-    request.send();
+    request.send
 }
 function findbysubGenreandfeaturedArtist() {
     let request = new XMLHttpRequest();
@@ -89,7 +92,7 @@ function findbysubGenreandfeaturedArtist() {
     request.onload = function () {
         renderData(JSON.parse(request.response));
     }
-    request.send();
+    request.send
 }
 
 
