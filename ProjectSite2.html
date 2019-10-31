@@ -3,30 +3,96 @@
         <link rel="stylesheet" type="text/css" href="styling.css">
     </head>
 
-<body>
+<body onload="myFunc()">
     <script type="text/javascript" src="JSB2F.js"></script>
 <div class="jumbotron text-center">
   <center> <h1>The Rock Playlist Database</h1> </center>
 <center> <p>Search for a range of Rock and Metal playlists below</p> </center>
 </div>
-<input type="button" value="Show all records" id="showRecords" onclick= "function showAllRecords()">
-<form class= searchBar action="JSB2F.js">
-  <input type="text" placeholder="Search..." name="search">
-  <button type="submit"><i class="searchButton"></i></button>
-</form>
+<center><form action='search.php' method='POST'>
+  <input type='text' name='search'/>
+  <input type='submit' value='submit'/>
+  </form> </center>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <br>
-      <br>   
-  <center><div class="panel-heading">Your Playlist:</div> </center>
+ 
+<center><table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id<th>
+      <th scope="col">Url</th>
+      <th scope="col">Playlist Name</th>
+      <th scope="col">SubGenre</th>
+      <th scope="col">Featured Artist</th>
+    </tr>
+  </thead> </center>
   <br>
-  <div class="panel-body"><center> <iframe width="420" height="315"
-    src="https://www.youtube.com/watch?v=6NXnxTNIWkc&list=RDQMCpBlqbi-110&start_radio=1">
-    </iframe> </center>
+  <br>   
+<center> <input type="button" value= "Show All" onclick="showAllRecords()"> 
+<input type="button" value= "Find Artists" onclick= "findbyfeaturedArtist()"> 
+<input type="button" value= "Find by Genre" onclick= "findbysubGenre()">
+<input type="button" value= "Find by Playlist" onclick= "findbyplaylistName()"> </center>
 </div>
     </div>
   </div>
 </div>
+
+<script>
+
+function showAllRecords() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/showAllLists");
+    request.onload = function () {
+        renderData(JSON.parse(request.response)); 
+    }
+    request.send
+    console.log("Hello my friend")
+}
+
+
+function findbyfeaturedArtist() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/findByFeaturedArtist/{a}");
+    request.onload = function () {
+        renderData(JSON.parse(request.response));
+    }
+    request.send
+}
+function findbysubGenre() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/findBySubGenre/{sg}");
+    request.onload = function () {
+        renderData(JSON.parse(request.response));
+    }
+    request.send();
+}
+function findbyplayListName() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/findByPlayListName/{pn}");
+    request.onload = function () {
+        renderData(JSON.parse(request.response));
+    }
+    request.send();
+}
+function findbyUrl() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/findByUrl/{u}");
+    request.onload = function () {
+        renderData(JSON.parse(request.response));
+    }
+    request.send();
+}
+function findbysubGenreandfeaturedArtist() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://localhost:9001/findBySubGenreandFeaturedArtist/{s}/{ar}");
+    request.onload = function () {
+        renderData(JSON.parse(request.response));
+    }
+    request.send();
+}
+
+
+</script>
 </body>
 </html>

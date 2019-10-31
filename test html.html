@@ -1,0 +1,39 @@
+<html>
+<script>
+function request(){
+console.log("helloo");
+const Http = new XMLHttpRequest();
+const url='http://localhost:9001/showAllLists';
+Http.open("GET", url);
+Http.onreadystatechange = function(e){
+console.log("status"+Http.readyState);
+if (Http.readyState==4){
+	data=JSON.parse(Http.responseText);
+	var A=0;
+	console.log("length:"+data.length);
+	data.forEach(function(item){
+		var id=document.createElement("span");
+		var featuredArtist=document.createElement("span");
+		var playlistName=document.createElement("span");
+		var subGenre=document.createElement("span");
+		var url=document.createElement("span");
+		id.innerHTML=item.id;	
+		featuredArtist.innerHTML=item.featuredArtist;
+		playlistName.innerHTML=item.playlistName;
+		subGenre.innerHTML=item.subGenre;
+		url.innerHTML=item.url;
+		document.body.appendChild(id);
+		document.body.appendChild(featuredArtist);
+		document.body.appendChild(playlistName);
+		document.body.appendChild(subGenre);
+		document.body.appendChild(url);	
+		A=A+1;
+		console.log(A);
+	});
+}
+}
+Http.send();
+}
+</script>
+<input type="button" value="Send Request" onclick="request()">
+</html>

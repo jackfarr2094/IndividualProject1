@@ -11,10 +11,11 @@ import javax.persistence.Id;
 public class RockPlaylists {
 
 	@Id
-	@Column(name="id", unique=true, nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Column(name="id", unique=true, nullable=false)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private int id;
-	@Column(unique = true)
+//	@Column(unique = true)
 	private String url;
 	private String playlistName;
 	private String subGenre;
