@@ -3,7 +3,7 @@
         <link rel="stylesheet" type="text/css" href="styling.css">
     </head>
 
-<body onload="myFunc()">
+<body>
     <script type="text/javascript" src="JSB2F.js"></script>
 <div class="jumbotron text-center">
   <center> <h1>The Rock Playlist Database</h1> </center>
@@ -17,18 +17,19 @@
   <div class="row">
     <div class="col-sm-4">
  
-<center><table class="table table-dark">
+<center><table id="table1" class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col">id<th>
       <th scope="col">Url</th>
       <th scope="col">Playlist Name</th>
       <th scope="col">SubGenre</th>
-      <th scope="col">Featured Artist</th>
+      <!-- <th scope="col">Featured Artist</th> -->
     </tr>
   </thead> </center>
   <br>
   <br>   
+
+
 <center> <input type="button" value= "Show All" onclick="showAllRecords()"> 
 <input type="button" value= "Find Artists" onclick= "findbyfeaturedArtist()"> 
 <input type="button" value= "Find by Genre" onclick= "findbysubGenre()">
@@ -40,15 +41,74 @@
 
 <script>
 
+// function showAllRecords() {
+//     var xhr = new XMLHttpRequest();
+
+// xhr.open('GET', 'https://localhost:9001/showAllLists', true);
+
+// xhr.onreadystatechange = function() {
+//     if (xhr.readyState == XMLHttpRequest.DONE) {
+        
+//     }
+// }
+// xhr.send(null);
+// console.log("Show All")
+// }
+
 function showAllRecords() {
-    let request = new XMLHttpRequest();
-    request.open("GET", "https://localhost:9001/showAllLists");
-    request.onload = function () {
-        renderData(JSON.parse(request.response)); 
-    }
-    request.send
-    console.log("Show All")
-}
+      // var elmtTable = document.getElementById('btable');
+      // var tableRows = elmtTable.getElementsByTagName('tr');
+      // var rowCount = tableRows.length;
+      // for (var x=rowCount-1; x>0; x--) {
+      //    elmtTable.removeChild(tableRows[x]);
+      // }
+      const Http = new XMLHttpRequest();
+      const url = 'http://localhost:9001/showAllLists';
+      Http.open("GET", url);
+      Http.onreadystatechange = function(e) {
+          if(Http.readyState==4){
+              data = JSON.parse(Http.responseText);
+              data.forEach(function(item) {
+
+                              
+
+                // console.log(item.playlistName);
+                  
+                  var table = document.getElementById("table1");
+                  var newrow = document.createElement("tr");
+                  var tuser = newrow.appendChild(document.createElement('td'))
+                  var tquestion = newrow.appendChild(document.createElement('td'))
+                  var tanswer = newrow.appendChild(document.createElement('td'))
+                  var updateButton = document.createElement("input");
+                  updateButton.type = "button";
+                  updateButton.value = "Update";
+                        var tupdate = newrow.appendChild(updateButton);
+                        updateButton.onclick = function(){
+                          showUpdateForm(item.id);
+                        };
+
+                  var deletebutton = document.createElement("input");
+                  deletebutton.type = "button";
+                        deletebutton.value = "Delete";
+                        var tdelete = newrow.appendChild(deletebutton);
+                        deletebutton.onclick = function(){
+                            deleteRecord(item.id);
+                        };
+                  tuser.innerHTML = item.url;
+                  tuser.style.color = "blue";
+                  tquestion.innerHTML = item.playlistName;
+                  tquestion.style.color = "blue";
+                  tanswer.innerHTML = item.subGenre;
+                  tanswer.style.color = "blue";
+                  table.appendChild(newrow);
+
+                  
+              });
+          }
+      }
+      Http.send();
+  }
+
 
 
 function findbyfeaturedArtist() {
