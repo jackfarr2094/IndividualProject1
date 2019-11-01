@@ -74,9 +74,9 @@ public class DBFController {
 
 		}
 	
-	@DeleteMapping("/Deleteby/{pn}")
-	public String deletebyPlaylistName (@PathVariable String pn) {
-		repo.deleteByPlaylistName(pn);
+	@DeleteMapping("/Deleteby/{id}")
+	public String deleteData (@PathVariable int id) {
+		repo.deleteById(id);
 		return "Delete Successful";
 		
 	}

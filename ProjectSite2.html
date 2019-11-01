@@ -16,28 +16,32 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
- 
+
 <center><table id="table1" class="table table-hover table-dark">
   <thead>
     <tr>
       <th scope="col">Url</th>
       <th scope="col">Playlist Name</th>
       <th scope="col">SubGenre</th>
-      <!-- <th scope="col">Featured Artist</th> -->
+      <th scope="col">Featured Artist</th>
     </tr>
   </thead> </center>
   <br>
   <br>   
 
-
 <center> <input type="button" value= "Show All" onclick="showAllRecords()"> 
 <input type="button" value= "Find Artists" onclick= "findbyfeaturedArtist()"> 
 <input type="button" value= "Find by Genre" onclick= "findbysubGenre()">
 <input type="button" value= "Find by Playlist" onclick= "findbyplaylistName()"> </center>
+<br>
+<br>
 </div>
     </div>
   </div>
 </div>
+
+
+
 
 <script>
 
@@ -56,12 +60,6 @@
 // }
 
 function showAllRecords() {
-      // var elmtTable = document.getElementById('btable');
-      // var tableRows = elmtTable.getElementsByTagName('tr');
-      // var rowCount = tableRows.length;
-      // for (var x=rowCount-1; x>0; x--) {
-      //    elmtTable.removeChild(tableRows[x]);
-      // }
       const Http = new XMLHttpRequest();
       const url = 'http://localhost:9001/showAllLists';
       Http.open("GET", url);
@@ -69,16 +67,16 @@ function showAllRecords() {
           if(Http.readyState==4){
               data = JSON.parse(Http.responseText);
               data.forEach(function(item) {
-
                               
 
                 // console.log(item.playlistName);
                   
                   var table = document.getElementById("table1");
                   var newrow = document.createElement("tr");
-                  var tuser = newrow.appendChild(document.createElement('td'))
-                  var tquestion = newrow.appendChild(document.createElement('td'))
-                  var tanswer = newrow.appendChild(document.createElement('td'))
+                  var turl = newrow.appendChild(document.createElement('td'))
+                  var tplaylistName = newrow.appendChild(document.createElement('td'))
+                  var tsubGenre = newrow.appendChild(document.createElement('td'))
+                  var tfeaturedArtist = newrow.appendChild(document.createElement('td'))
                   var updateButton = document.createElement("input");
                   updateButton.type = "button";
                   updateButton.value = "Update";
@@ -87,19 +85,23 @@ function showAllRecords() {
                           showUpdateForm(item.id);
                         };
 
+
                   var deletebutton = document.createElement("input");
                   deletebutton.type = "button";
                         deletebutton.value = "Delete";
                         var tdelete = newrow.appendChild(deletebutton);
                         deletebutton.onclick = function(){
                             deleteRecord(item.id);
+
                         };
-                  tuser.innerHTML = item.url;
-                  tuser.style.color = "blue";
-                  tquestion.innerHTML = item.playlistName;
-                  tquestion.style.color = "blue";
-                  tanswer.innerHTML = item.subGenre;
-                  tanswer.style.color = "blue";
+                  turl.innerHTML = item.url;
+                  turl.style.color = "blue";
+                  tplaylistName.innerHTML = item.playlistName;
+                  tplaylistName.style.color = "blue";
+                  tsubGenre.innerHTML = item.subGenre;
+                  tsubGenre.style.color = "blue";
+                  tfeaturedArtist.innerHTML = item.featuredArtist;
+                  tfeaturedArtist.style.color = "blue";
                   table.appendChild(newrow);
 
                   
@@ -108,8 +110,6 @@ function showAllRecords() {
       }
       Http.send();
   }
-
-
 
 function findbyfeaturedArtist() {
     let request = new XMLHttpRequest();
@@ -155,7 +155,61 @@ function findbysubGenreandfeaturedArtist() {
     request.send
 }
 
+function deleteRecord() {
+      const Http = new XMLHttpRequest();
+      const url = 'http://localhost:9001/Deleteby/{id}';
+      Http.open("DELETE", url);
+      Http.onreadystatechange = function(e) {
+          if(Http.readyState==4) {
+            data = JSON.parse(Http.responseText);
+              data.forEach(function(item) {
+              }
+          ,)}
+      }
+}
+
+function updateRecord() {
+      const Http = new XMLHttpRequest();
+      const url = 'http://localhost:9001/Deleteby/{id}';
+      Http.open("PUT", url);
+      Http.onreadystatechange = function(e) {
+          if(Http.readyState==4) {
+            data = JSON.parse(Http.responseText);
+              data.forEach(function(item) {
+              }
+          ,)}
+      }
+}
+
+function addRecord() {
+      const Http = new XMLHttpRequest();
+      const url = 'http://localhost:9001/RockPlaylists';
+      Http.open("POST", url);
+      Http.onreadystatechange = function(e) {
+          if(Http.readyState==4) {
+            data = JSON.parse(Http.responseText);
+              data.forEach(function(item) {
+              }
+          ,)}
+      }
+}
+   
+               
+
 
 </script>
+  <form>
+        Url:<br>
+        <input type="text" name="url"><br>
+        Playlist Name:<br>
+        <input type="text" name="playlistName"><br><br>
+        SubGenre:<br>
+        <input type="text" name="SubGenre"><br>
+        Featured Artist:<br>
+        <input type="text" name="featuredArtist"><br><br>
+        <input type="submit" value="Submit" onsubmit= "function addRecord()">
+      </form>
+      <br>
+      <br>
 </body>
 </html>
