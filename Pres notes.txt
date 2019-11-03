@@ -1,0 +1,32 @@
+Initital project plan:
+
+- Creating a website which connects to a database of rock playlists from youtube.
+- Show Trello and initial wireframe
+
+Link to project: http://34.89.28.0/ProjectSite2.html
+
+Demonstrate various elements of the project, postman, html, the front end you have.
+If I can get things on the cloud working show that.
+
+Things to show/mention -
+Git
+Postman
+HTML
+Springboot
+
+Things that went well:
+- Could get some of my back end working
+- Got the fron end to do something
+= Springboot and Postman on the whole functioned
+
+Things that did not go well:
+- Struggled with html
+- Excpected a little too much of myself
+- Stress
+
+Self reflection:
+- I would like to get this functioning properly
+- Considering this is my first project I'm happy to have at least got something to show
+- Managing my own expectations
+- Ask for help from colleagues
+-  
