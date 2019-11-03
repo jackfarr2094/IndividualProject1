@@ -7,6 +7,11 @@ h1 {
   font-family: verdana;
   font-size: 300%;
 }
+h2 {
+  color: white;
+  font-family: verdana;
+  font-size: 75%;
+}
 p {
   color: red;
   font-family: courier;
@@ -17,8 +22,12 @@ p {
     position: absolute;
     left: 40%;
 }
-form{
-  color: white;
+.form{
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
 }
 
 .searchButton{
