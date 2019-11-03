@@ -1,6 +1,24 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  font-family: verdana;
+  font-size: 300%;
+}
+p {
+  color: red;
+  font-family: courier;
+  font-size: 160%;
+}
+
 .searchBar{
     position: absolute;
     left: 40%;
+}
+form{
+  color: white;
 }
 
 .searchButton{
@@ -28,7 +46,7 @@ table{
       tr:nth-child(even){background-color: #f2f2f2}
       
       th {
-        background-color: #4CAF50;
+        background-color: silver;
         color: white;
       }
       

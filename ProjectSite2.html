@@ -9,15 +9,11 @@
   <center> <h1>The Rock Playlist Database</h1> </center>
 <center> <p>Search for a range of Rock and Metal playlists below</p> </center>
 </div>
-<center><form action='search.php' method='POST'>
-  <input type='text' name='search'/>
-  <input type='submit' value='submit'/>
-  </form> </center>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
 
-<center><table id="table1" class="table table-hover table-dark">
+<center><table id="table1" class="table table-dark">
   <thead>
     <tr>
       <th scope="col">Url</th>
@@ -95,13 +91,13 @@ function showAllRecords() {
 
                         };
                   turl.innerHTML = item.url;
-                  turl.style.color = "blue";
+                  turl.style.color = "red";
                   tplaylistName.innerHTML = item.playlistName;
-                  tplaylistName.style.color = "blue";
+                  tplaylistName.style.color = "red";
                   tsubGenre.innerHTML = item.subGenre;
-                  tsubGenre.style.color = "blue";
+                  tsubGenre.style.color = "red";
                   tfeaturedArtist.innerHTML = item.featuredArtist;
-                  tfeaturedArtist.style.color = "blue";
+                  tfeaturedArtist.style.color = "red";
                   table.appendChild(newrow);
 
                   
@@ -168,19 +164,18 @@ function deleteRecord() {
       }
 }
 
-function updateRecord() {
-      const Http = new XMLHttpRequest();
-      const url = 'http://localhost:9001/Deleteby/{id}';
-      Http.open("PUT", url);
-      Http.onreadystatechange = function(e) {
-          if(Http.readyState==4) {
-            data = JSON.parse(Http.responseText);
-              data.forEach(function(item) {
-              }
-          ,)}
-      }
+function updateRecord(id) {
+let request = new XMLHttpRequest();
+request.open("PUT", "http://localhost:9001/updateby/{id}");
+request.setRequestHeader("Content-Type", "application/json");
+const questiondata = {
+  "id": id,
+  "url": document.getElementById("url-update").value,
+  "playlistName": document.getElementById("playlistName-update").value,
+  "subGenre":  document.getElementById("subGenre-update").value,
+  "featuredArtist": document.getElementById("featuredArtist-update").value,
 }
-
+}
 function addRecord() {
       const Http = new XMLHttpRequest();
       const url = 'http://localhost:9001/RockPlaylists';
