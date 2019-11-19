@@ -1,3 +1,3 @@
-FROM httpd:latest
-COPY ./index.html /usr/local/apache2/htdocs/
-EXPOSE 80
+FROM java:8-jdk-alpine
+COPY ./target/index/notes.jar /usr/local/app
+ENTRYPOINT ["java", "-jar","usr/app/notes.jar"]
